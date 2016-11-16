@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Cookbook: Submit Recipe</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<h2 class="header">Submit A Recipe</h2>
+	<div class="container">
+		<form>
+			<form class="form-inline">
+				<div class="form-group"></div>	<!-- these 3 empty divs are for formatting, it won't line up w/o them -->
+				<div class="form-group"></div>	<!-- i don't know why -->
+				<div class="checkbox"></div>
+			</form>
+
+			<form class="form-inline">
+				<div class="row">
+					<div class="form-group .col-lg-4">
+						<label for="recipeName">Recipe name:</label>
+						<input type="text" class="form-control" id="recipeName" placeholder="Mom's chicken soup">
+					</div>
+
+					<div class="form-group authorInput .col-lg-4">
+						<label for="recipeAuthor">Recipe author:</label>
+						<input type="text" class="form-control" id="recipeAuthor" placeholder="Mom">
+					</div>
+
+					<div class="form-group yearInput .col-lg-4">
+						<label for="recipeYear">Year:</label>
+						<input type="text" class="form-control" id="recipeYear" placeholder="1974">
+					</div>
+				</div>
+			</form>
+
+	<!-- why won't these line up??? -->
+
+
+			<!-- Split button -->
+			<form class="form-inline">
+				<div class="duplicateInput" id="originalInput">
+					<input type="text" class="form-control ingredientNumber" placeholder="1">
+					<select class="ingredientUnit">
+						<option>unit</option>
+						<option value="cup">cup</option>
+						<option value="tbsp">tbsp</option>
+						<option value="tsp">tsp</option>
+						<option value="fluid oz">fluid oz</option>
+						<option value="gallon">gallon</option>
+						<option value="lb">lb</option>
+						<option value="pint">pint</option>
+						<option value="quart">quart</option>
+						<option value="gram">gram</option>
+						<option value="kg">kg</option>
+						<option value="ml">ml</option>
+						<option value="liter">liter</option>
+						<option value="null">--</option>
+					</select>
+					<input type="text" class="form-control ingredientName" placeholder="Chicken broth">
+				</div>
+				<button type="button" class="btn btn-default" id="addMoreIngredients">+</button>
+			</form>
+
+
+			<div class="form-group">
+				<label for="recipeAuthor">Recipe:</label>
+				<textarea class="form-control" rows="3" placeholder="Enter recipe here" id="recipeInstructions"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label for="uploadPicture">Upload picture</label>
+				<input type="file" id="uploadPicture">
+				<p class="help-block">Upload a picture of the cooked meal</p>
+			</div>
+
+			<div class="checkbox">
+				<label>
+					<input type="checkbox"> Public
+				</label>
+			</div>
+
+			<div id="recipe_template">
+				<h3 class="recipe_name"></h3>
+				<h4 class="recipe_author"></h4>
+				<h4 class="recipe_year"></h4>
+				<p class="recipe_ingredient_number"></p>
+				<p class="recipe_ingredient_unit"></p>
+				<p class="recipe_ingredient_name"></p>
+				<p class="recipe_description"></p>
+			</div>
+			<div id="recipes"></div>
+	
+				<button type="submit" class="btn btn-default" id="send_new_recipe">Submit</button>
+
+		</form>
+	</div>
+
+	<form>
+		<button class="btn btn-default" formaction="/">Home</button>
+	</form>
+
+<script src="../js/submit.js"></script>
+<script>
+	
+	function duplicate() {
+		var clone = originalInput.cloneNode(true); // "deep" clone
+		clone.id = ""; // there can only be one element with an ID
+		originalInput.parentNode.appendChild(clone);
+	}
+
+	$('#addMoreIngredients').click(duplicate);
+
+	function idAssign() {	//half-written.		should it go into the function duplicate?
+		document.write('<input type="text" id="'+idVar[i]+'">');
+	}
+
+</script>
+	
+</body>
+</html><a href</="#">

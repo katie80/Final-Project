@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>User Page</title>
+	<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div class="header">Your Recipes</div>
+	<hr>
+	<form>
+		<button class="btn btn-default" formaction="/submit">Submit New Recipe</button>
+	</form>
+	<hr>
+	<div id="recipeArea">
+	
+	</div>
+
+	<script type="text/javascript">
+
+	function clickRecipe(evt) {
+		var buttonEl = $(evt.target);
+		var recipeId = buttonEl.attr("id");
+		location.href = "/recipe/" + recipeId;
+	}
+
+		$(document).ready(function() {
+
+			$.get('/api/recipes', function(res) {
+				// res here is what we ("res.send") on the backend
+				console.log(res);
+				if (res.length === 0) {
+					$('#recipeArea').text("No recipes!");
+				} else {
+					for (var i in res) {
+						console.log(res[i]);
+
+						// for-in, since for-of sometimes doesn't work on frontend
+						$('#recipeArea').append("<li><a class='recipeLink' id='" + res[i]._id + "'>" + res[i].name + "</a></li>");
+					}
+					$('.recipeLink').click(clickRecipe);
+				}
+			}, 'json'); 
+		});
+	</script>
+
+
+	
+</body>
+</html>

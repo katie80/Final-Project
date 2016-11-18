@@ -7,26 +7,95 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Abhaya+Libre:400,600|Pacifico" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<style type="text/css">
+
+		body {
+			background-color: #ECEAEB;
+			font-family: 'Raleway', sans-serif;
+
+		}
+
+		.header {
+			font-family: 'Pacifico', cursive;
+		/*	font-size: 50px;*/
+			background-color: white;
+			color: #723F5F;
+			margin-top: 0;
+			margin-bottom: 0;
+			padding: 20px;
+			text-align: center;
+		}
+
+		.container {
+			border: 1px solid #313030;
+			border-top: none;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+			padding: 15px 50px 50px 50px;
+		}
+
+		h2 {
+			margin-bottom: 20px;
+		}
+
+		.recipeHeader {
+			text-align: center;
+			font-size: 1.5em;
+		}
+
+		.recipeName {
+			font-size: 1.2em;
+		}
+
+		#bottomButtons {
+			margin-top: 20px;
+			margin-right: 
+		}
+
+		#recipeHeader {
+			margin-top: 30px;
+		}
+
+	</style>
 </head>
 <body>
-	<div class="header" id="recipeArea">
-		<div class="recipeName"></div>
-		<div class="recipeAuthor"></div>
-		<div class="recipeYear"></div>
-		<div class="recipeIngredients">
-			<div class="ingredientNumber"></div>
-			<div class="ingredientUnit"></div>
-			<div class="ingredientName"></div>
+	<h2 class="header">Cookbook</h2>
+	<div class="container">
+		<div id="recipeArea">
+			<div class="recipeHeaderDiv">
+				<p class="recipeHeader"><span class="recipeName"></span><br>by <span class="recipeAuthor"></span>, circa <span class="recipeYear"></span></p>
+			</div>
+
+			<hr>
+
+			<div class="recipeContentDiv">
+				<h4>Ingredients</h4>
+				<div id="recipeIngredients">
+				</div>
+			</div>
+
+			<h4 id="recipeHeader">Recipe</h4>
+			<div class="recipeInstructions"></div>
 		</div>
-		<div class="recipeInstructions"></div>
+
+		<form id="bottomButtons">
+			<button class="btn btn-default" id="backHomeBtn" formaction="/">
+				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+			</button>
+			<button class="btn btn-default" formaction="/user"><span class="glyphicon glyphicon-grain" aria-hidden="true"></span> All Recipes</button>
+		</form>
 	</div>
 
-	<form>
-		<button class="btn btn-default" formaction="/user">My Recipes</button>
-	</form>
+	<div id="recipeIngredientsTemplate" style="display:none">
+		<p><input type="checkbox" name="ingredientDone" value="ing"> <span class="ingredientNumber"></span> <span class="ingredientUnit"></span> <span class="ingredientName"></span></p>
+	</div>
+
 
 	<script type="text/javascript">
+	/*jshint esversion:6*/
 
 
 		$(document).ready(function() {
@@ -40,14 +109,31 @@
 				$(".recipeName").append(res.name);
 				$(".recipeAuthor").append(res.author);
 				$(".recipeYear").append(res.year);
-				$(".recipeInstructions").append(res.instructions);
-				var ingredients = JSON.parse(res.ingredients);
-				$(".recipeIngredients").append(ingredients);
-				for (var i of ingredients) {
-					$(".ingredientNumber").append(ingredients[i].number);
-					$(".ingredientUnit").append(ingredients[i].unit);
-					$(".ingredientName").append(ingredients[i].name);
+
+				//change recipe.instructiosn into an array
+				var instructions = res.instructions.split("\n");
+				for (var i of instructions) {
+					$(".recipeInstructions").append(i + "<br>");
 				}
+				
+
+				var ingredients = JSON.parse(res.ingredients);
+
+				for (i in ingredients) {
+    				var ingredientDiv = $('#recipeIngredientsTemplate').clone();
+    				console.log(i);
+    					ingredientDiv.removeAttr("id");
+    				console.log(ingredientDiv.find(".ingredientNumber"));
+
+
+    				ingredientDiv.find(".ingredientNumber").text(ingredients[i].number);
+					ingredientDiv.find(".ingredientUnit").text(ingredients[i].unit);
+					ingredientDiv.find(".ingredientName").text(ingredients[i].name);
+					ingredientDiv.show();
+					$('#recipeIngredients').append(ingredientDiv);
+
+				}
+
 				console.log(ingredients);
 			}, 'json'); 
 		});

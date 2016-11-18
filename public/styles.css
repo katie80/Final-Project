@@ -1,8 +1,89 @@
-.header {
-	background-color: #723F5F;
-	margin-top: 0;
+body {
+	background-color: #ECEAEB;
+	font-family: 'Raleway', sans-serif;
 }
 
-#ingredientNumber {
+.header {
+	font-family: 'Pacifico', cursive;
+/*	font-size: 50px;*/
+	background-color: white;
+	color: #723F5F;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding: 20px;
+	text-align: center;
+}
+
+h4 {
+	margin-bottom: 20px;
+}
+
+.ingredientNumber {
 	max-width: 50px;
+}
+
+a {
+	color: #313030;
+	cursor: pointer;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+.btn {
+	margin: 10px;
+}
+
+img {
+	max-width: 100%;
+}
+
+.frontPageImg {
+	max-width: 200px;
+	margin: -2px;
+}
+
+.imgContainer {
+	margin: 20px auto;
+}
+
+#recipeArea {
+	font-size: 1.5em;
+}
+
+#recipeInstructions {
+	max-width: 80%;
+	min-height: 400px;
+}
+
+#originalInput {
+	margin-top: 10px;
+}
+
+.duplicateInput {
+	margin-bottom: 4px;
+}
+
+.container {
+	margin-bottom: 30px;
+}
+
+.imageDiv {
+	background-color: white;
+
+}
+
+#userPageImg {
+	border-radius: 10px;
+	margin: 10px;
+	max-width: 95%;
+}
+
+.nameAuthYear {
+	margin-left: 10px;
 }

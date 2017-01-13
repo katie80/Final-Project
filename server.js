@@ -87,7 +87,7 @@ app.get("/api/recipes", (req, res) => {
 	
 });
 
-app.use(express.static('public'));
+app.use(express.static(__dirname));
 
 app.use((req, res, next) => {
     res.status(404);

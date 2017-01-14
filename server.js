@@ -1,6 +1,8 @@
 /*jshint esversion:6 */
 var express = require("express");
 
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 var app = express();
 
 var mongoose = require("mongoose");
@@ -18,7 +20,13 @@ var Recipe = recipeConstructor(mongoose);
 // create our storage object
 // var storage = new Storage();
 
-mongoose.connect("mongodb://localhost");
+if (env === 'development') {
+	mongoose.connect('mongodb://localhost');
+} else {
+	mongoose.connect("mongodb://katie80:Viola911@ds063134.mlab.com:63134/cookbook");
+}
+
+
 
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
